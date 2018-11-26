@@ -1,5 +1,6 @@
 import { AppComponent } from './app-component.js';
 import { ProductCard } from './product-card.js';
+import { ProductService } from '../services/product-service.js';
 
 const TEMPLATE = `
     <div class="mdl-grid">
@@ -32,6 +33,25 @@ export class ProductList extends AppComponent {
 
     onReady() {
         console.log('Product List Component Ready');
+        this.loadProducts();
+    }
+
+    loadProducts() {
+        this.productService = new ProductService();
+        this.productService.fetchProducts()
+            .then((data) => {
+                this.products = JSON.parse(data);
+                this.refreshProducts();
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    refreshProducts() {
+        for (let product of this.products) {
+            this.productContainer.appendChild(new ProductCard(product));
+        }
     }
 
 }

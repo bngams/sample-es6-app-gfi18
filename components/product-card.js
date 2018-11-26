@@ -20,6 +20,7 @@ const TEMPLATE = `
 export class ProductCard extends AppComponent {
 
     constructor(product) {
+        super();
         this.product = product;
     }
 

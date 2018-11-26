@@ -8,7 +8,7 @@ const TEMPLATE = `
                     <input class="mdl-textfield__input" type="text" id="product-name-input"></input>
                     <label class="mdl-textfield__label" for="product-name-input">Product name</label>
                 </div>
-                <button id="submit-product" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                <button type="button" id="submit-product" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                     Add
                 </button>
             </form>
@@ -37,7 +37,7 @@ export class ProductForm extends AppComponent {
 
     submitEvent() {
         let product = {
-            name: this.nameInput
+            name: this.nameInput.value
         };
         let event = new CustomEvent('product-add', { detail: product });
         document.dispatchEvent(event);
