@@ -11,6 +11,10 @@ const TEMPLATE = `
 
 export class ProductList extends AppComponent {
 
+    constructor() {
+        super("productService");
+    }
+
     display() {
         this.innerHTML = TEMPLATE; // set HTML content
         componentHandler.upgradeElement(this); // display MDL / reinit comp
@@ -37,7 +41,7 @@ export class ProductList extends AppComponent {
     }
 
     loadProducts() {
-        this.productService = new ProductService();
+        this.productService = this.injections["productService"];
         this.productService.fetchProducts()
             .then((data) => {
                 this.products = JSON.parse(data);
